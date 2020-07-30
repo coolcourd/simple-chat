@@ -48,3 +48,8 @@ footer {
     margin-right: 5%;
     height: 80px;
 }
+
+img {
+    max-width: 80% !important;
+    max-height: 200px !important;
+}
