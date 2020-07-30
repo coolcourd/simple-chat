@@ -58,7 +58,15 @@ const checkForMessages = async () => {
 }
 
 document.getElementById("send").addEventListener("click", sendMessage)
+document.body.addEventListener('keyup', (e) => {
+    if (e.ctrlKey && e.keyCode === 13) {
+        sendMessage()
+    }
+})
+
+
 checkForMessages()
+
 setInterval(() => {
     checkForMessages()
 }, 2000);
