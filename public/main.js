@@ -43,6 +43,7 @@ const addMessage = ({ name, message, time }) => {
 const checkForMessages = async () => {
     const thisPage = window.location.pathname.split("/").pop()
     const request = await fetch(`/data/${thisPage}.json`)
+    try{
     const recentMessages = await request.json()
     if (messages.length !== recentMessages.length) {
         console.log(messages.length, recentMessages.length)
@@ -55,14 +56,42 @@ const checkForMessages = async () => {
             addMessage(e)
         })
     }
+} catch(e) {
+
+}
 }
 
-document.getElementById("send").addEventListener("click", sendMessage)
+document.getElementById("send").addEventListener("click", (e) => {
+    sendMessage(e);
+    setupNotifications()
+})
 document.body.addEventListener('keyup', (e) => {
     if (e.ctrlKey && e.keyCode === 13) {
         sendMessage()
     }
 })
+
+
+
+const setupNotifications = () => {
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    }
+  
+    else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then(function (permission) {
+        if (permission === "granted") {
+          const notification = new Notification("This is how you will be notified");
+        }
+      });
+    }
+  }
+
+  const notify = (message) => {
+    if (Notification.permission === "granted") {
+        const notification = new Notification("message");
+      }
+  }
 
 
 checkForMessages()

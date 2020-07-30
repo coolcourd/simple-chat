@@ -11,15 +11,14 @@ app.set('views', 'src/views');
 
 app.get('/room/:room', (req, res) => {
   const path = req.originalUrl.replace(/\//g, "-").substr(6)
-//   addData(path, {
-//     "name":  "Elizabeth",
-//     "message": "I miss you",
-//     "time": "10:33"
-// })
   res.render("index", {
     path,
     messages: getData(path)
   })
+})
+
+app.get('/', (req, res) => {
+  res.render("home", {})
 })
 
 app.post('/room/:room', (req, res) => {
