@@ -46,7 +46,7 @@ const checkForMessages = async () => {
     try{
     const recentMessages = await request.json()
     if (messages.length !== recentMessages.length) {
-        console.log(messages.length, recentMessages.length)
+        notify("there is a new message")
         const diff = recentMessages.length - messages.length
         const toAdd = []
         for (i=0; i<diff; i++) {
@@ -89,7 +89,7 @@ const setupNotifications = () => {
 
   const notify = (message) => {
     if (Notification.permission === "granted") {
-        const notification = new Notification("message");
+        const notification = new Notification(message);
       }
   }
 
