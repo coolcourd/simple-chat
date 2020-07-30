@@ -30,7 +30,7 @@ const addMessage = ({ name, message, time }) => {
     const messagesContainer = document.getElementById("message_container")
     const messageDiv = document.createElement("div")
     messageDiv.classList.add("message")
-    const toAdd = [time, name, message]
+    const toAdd = [new Date(time).toLocaleString(), name, message]
     toAdd.forEach(e => {
         const paragraph = document.createElement("p")
         paragraph.innerHTML = e

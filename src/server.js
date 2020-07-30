@@ -29,7 +29,7 @@ app.post('/room/:room', (req, res) => {
   if (!req.body.name) {
     req.body.name = "Mystery Person"
   }
-  req.body.time = new Date().toLocaleString()
+  req.body.time = new Date().getTime()
   // req.body.ip = req.connection.remoteAddress
   addData(path, req.body)
   res.send(req.body)
