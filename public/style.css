@@ -1,0 +1,50 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+.message {
+    border: 1px solid #323;
+    padding: 5px 20px;
+    margin-bottom: 4px;
+}
+
+header {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    max-height: 100px;
+    background-color: aquamarine;
+    padding: 10px;
+  }
+
+footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 80px;
+    background-color: aquamarine;
+    padding: 10px;
+}
+
+#message_container {
+    margin-top: 120px;
+    margin-bottom: 110px;
+    padding: 10px;
+}
+
+#typing {
+    width: 80%;
+    height: 80px;
+    border: 1px dashed #323;
+    overflow-y: scroll;
+    float: left;
+
+}
+
+#send {
+    float: right;
+    width: 10%;
+    margin-right: 5%;
+    height: 80px;
+}
