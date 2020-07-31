@@ -1,7 +1,8 @@
 const express = require('express');
 var bodyParser = require('body-parser')
 
-const { getData, addData } = require('./functions'); 
+const { getData, addData } = require('./functions');
+const config = require("../config.json")
 
 const app = express()
 app.use(bodyParser.json())
@@ -37,5 +38,15 @@ app.post('/room/:room', (req, res) => {
 
 
 const port = 3001
-app.listen(3001)
-console.log(`app is running at http://localhost:${port}`)
+
+if (config.env === "prod") {
+  const privateKey = fs.readFileSync( config.key );
+  const certificate = fs.readFileSync( config.cert );
+  https.createServer({
+      key: privateKey,
+      cert: certificate
+  }, app).listen(port);
+  } else { 
+    app.listen(port)
+    console.log(`app is running at http://localhost:${port}`)
+  }
