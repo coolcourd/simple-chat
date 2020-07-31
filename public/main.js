@@ -1,4 +1,5 @@
 let messages = []
+const mainTitle = document.title
 const localName = localStorage.getItem("name")
 if (localName) {
     document.getElementById("your_name").value = localName
@@ -47,6 +48,7 @@ const checkForMessages = async () => {
     const recentMessages = await request.json()
     if (messages.length !== recentMessages.length) {
         // notify("there is a new message")
+        alertInTab()
         const diff = recentMessages.length - messages.length
         const toAdd = []
         for (i=0; i<diff; i++) {
@@ -72,26 +74,40 @@ document.body.addEventListener('keyup', (e) => {
 })
 
 
+const alertInTab = () => {
+    if (!document.hasFocus()){
+        if (document.title === mainTitle) {
+            document.title = "New Message!!!"
+        } else {
+            document.title = mainTitle
+        }
+        setTimeout(alertInTab, 1000)
+        } else {
+            document.title = mainTitle
+        }
+}
 
-// const setupNotifications = () => {
-//     if (!("Notification" in window)) {
-//       alert("This browser does not support desktop notification");
-//     }
+
+
+const setupNotifications = () => {
+    if (!("Notification" in window)) {
+      alert("This browser does not support desktop notification");
+    }
   
-//     else if (Notification.permission !== "denied") {
-//       Notification.requestPermission().then(function (permission) {
-//         if (permission === "granted") {
-//           const notification = new Notification("This is how you will be notified");
-//         }
-//       });
-//     }
-//   }
+    else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then(function (permission) {
+        if (permission === "granted") {
+          const notification = new Notification("This is how you will be notified");
+        }
+      });
+    }
+  }
 
-//   const notify = (message) => {
-//     if (Notification.permission === "granted") {
-//         const notification = new Notification(message);
-//       }
-//   }
+  const notify = (message) => {
+    if (Notification.permission === "granted") {
+        const notification = new Notification(message);
+      }
+  }
 
 
 checkForMessages()
