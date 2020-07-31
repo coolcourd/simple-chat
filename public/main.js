@@ -46,7 +46,7 @@ const checkForMessages = async () => {
     try{
     const recentMessages = await request.json()
     if (messages.length !== recentMessages.length) {
-        notify("there is a new message")
+        // notify("there is a new message")
         const diff = recentMessages.length - messages.length
         const toAdd = []
         for (i=0; i<diff; i++) {
@@ -63,7 +63,7 @@ const checkForMessages = async () => {
 
 document.getElementById("send").addEventListener("click", (e) => {
     sendMessage(e);
-    setupNotifications()
+    // setupNotifications()
 })
 document.body.addEventListener('keyup', (e) => {
     if (e.ctrlKey && e.keyCode === 13) {
@@ -73,25 +73,25 @@ document.body.addEventListener('keyup', (e) => {
 
 
 
-const setupNotifications = () => {
-    if (!("Notification" in window)) {
-      alert("This browser does not support desktop notification");
-    }
+// const setupNotifications = () => {
+//     if (!("Notification" in window)) {
+//       alert("This browser does not support desktop notification");
+//     }
   
-    else if (Notification.permission !== "denied") {
-      Notification.requestPermission().then(function (permission) {
-        if (permission === "granted") {
-          const notification = new Notification("This is how you will be notified");
-        }
-      });
-    }
-  }
+//     else if (Notification.permission !== "denied") {
+//       Notification.requestPermission().then(function (permission) {
+//         if (permission === "granted") {
+//           const notification = new Notification("This is how you will be notified");
+//         }
+//       });
+//     }
+//   }
 
-  const notify = (message) => {
-    if (Notification.permission === "granted") {
-        const notification = new Notification(message);
-      }
-  }
+//   const notify = (message) => {
+//     if (Notification.permission === "granted") {
+//         const notification = new Notification(message);
+//       }
+//   }
 
 
 checkForMessages()
