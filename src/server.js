@@ -39,16 +39,16 @@ app.post('/room/:room', (req, res) => {
 })
 
 
-const port = 3001
 
 if (config.env === "prod") {
   const privateKey = fs.readFileSync( config.key );
   const certificate = fs.readFileSync( config.cert );
   https.createServer({
-      key: privateKey,
-      cert: certificate
-  }, app).listen(port);
-  } else { 
+    key: privateKey,
+    cert:  certificate
+  }, app).listen(443)
+} else { 
+    const port = 3001
     app.listen(port)
     console.log(`app is running at http://localhost:${port}`)
   }
